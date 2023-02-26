@@ -6,6 +6,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 public class Get03 extends JsonPlaceHolderBaseURL{
 
@@ -62,13 +63,21 @@ public class Get03 extends JsonPlaceHolderBaseURL{
 
         response.then().assertThat().statusCode(200).contentType("application/json");
 
-
+/*
         response.
                 then().
                 assertThat().
                 body("title", Matchers.equalTo("quis ut nam facilis et officia qui"),
         "completed",Matchers.equalTo(false),
         "userId",Matchers.equalTo(1));
+*/
 
-    }
-}
+        response.then().assertThat().
+                statusCode(200).
+                contentType("application/json").
+                body("title", equalTo("quis ut nam facilis et officia qui"),
+                        "completed", equalTo(false),
+                        "userId", equalTo(1)
+                        );
+
+    }}

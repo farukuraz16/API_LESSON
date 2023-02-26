@@ -7,7 +7,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class Get01_Homework {
+public class Homework_01 {
     /*
     https://jsonplaceholder.typicode.com/todos/2/
 
