@@ -26,7 +26,7 @@ public class Homework_02 extends RestfulBaseURL {
     public void HM_02(){
         specification.pathParams("bookingPath","booking");
         Response response = given().spec(specification).when().get("/{bookingPath}");
-        //response.prettyPrint();
+        response.prettyPrint();
         //response.then().assertThat().body("firstname", Matchers.equalTo("Sarah"));
         response.then().assertThat().statusCode(200);
         response.then().assertThat().body(Matchers.containsString("bookingid"));

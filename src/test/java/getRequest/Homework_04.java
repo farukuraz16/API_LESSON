@@ -2,11 +2,15 @@ package getRequest;
 
 import BaseURLs.DummyBaseURL;
 import BaseURLs.SwapiBaseURL;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
+import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class Homework_04 extends SwapiBaseURL {
@@ -47,6 +51,7 @@ public class Homework_04 extends SwapiBaseURL {
         specification.pathParams("vehiclesPath", "vehicles", "idPath", 4);
         Response response = given().spec(specification).when().get("/{vehiclesPath}/{idPath}");
         response.prettyPrint();
+
         response.then().assertThat().statusCode(200).body("name",equalTo("Sand Crawler"),
                 "model",equalTo("Digger Crawler"),
                 "manufacturer",equalTo("Corellia Mining Corporation"),
@@ -62,6 +67,18 @@ public class Homework_04 extends SwapiBaseURL {
                 "created",equalTo("2014-12-10T15:36:25.724000Z"),
                 "edited",equalTo("2014-12-20T21:30:21.661000Z"),
                 "url",equalTo("https://swapi.dev/api/vehicles/4/"));
+
+        JsonPath jsonPath = response.jsonPath();
+        double length = jsonPath.getDouble("length");
+        List<Integer> pilots = jsonPath.getList("pilots");
+        List<Integer> films = jsonPath.getList("films");
+        System.out.println("pilots = " + pilots);
+        System.out.println("length = " + length);
+        System.out.println("films = " + films);
+        assertEquals(36.8,length);
+        assertEquals(0,pilots.size());
+        assertEquals(2,films.size());
+
 
     }
 }
