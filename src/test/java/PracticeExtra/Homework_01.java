@@ -1,4 +1,4 @@
-package getRequest;
+package PracticeExtra;
 
 import io.restassured.response.Response;
 import org.testng.annotations.Test;

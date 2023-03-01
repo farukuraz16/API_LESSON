@@ -4,6 +4,7 @@ import BaseURLs.SwapiBaseURL;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.*;
 
@@ -111,30 +112,73 @@ public class Get08 extends SwapiBaseURL {
 
          */
 
-        assertEquals(expextedDataMap.get("name"),actualData.get("name"));
-        assertEquals(expextedDataMap.get("model"),actualData.get("model"));
-        assertEquals(expextedDataMap.get("manufacturer"),actualData.get("manufacturer"));
-        assertEquals(expextedDataMap.get("cost_in_credits"),actualData.get("cost_in_credits"));
-        assertEquals(expextedDataMap.get("length"),actualData.get("length"));
-        assertEquals(expextedDataMap.get("max_atmosphering_speed"),actualData.get("max_atmosphering_speed"));
-        assertEquals(expextedDataMap.get("crew"),actualData.get("crew"));
-        assertEquals(expextedDataMap.get("passengers"),actualData.get("passengers"));
-        assertEquals(expextedDataMap.get("cargo_capacity"),actualData.get("cargo_capacity"));
-        assertEquals(expextedDataMap.get("consumables"),actualData.get("consumables"));
-        assertEquals(expextedDataMap.get("vehicle_class"),actualData.get("vehicle_class"));
-        assertEquals(expextedDataMap.get("pilots"),actualData.get("pilots"));
-        assertEquals(expextedDataMap.get("films"),actualData.get("films"));
-        assertEquals(expextedDataMap.get("created"),actualData.get("created"));
-        assertEquals(expextedDataMap.get("edited"),actualData.get("edited"));
-        assertEquals(expextedDataMap.get("url"),actualData.get("url"));
+        assertEquals(expextedDataMap.get("name"), actualData.get("name"));
+        assertEquals(expextedDataMap.get("model"), actualData.get("model"));
+        assertEquals(expextedDataMap.get("manufacturer"), actualData.get("manufacturer"));
+        assertEquals(expextedDataMap.get("cost_in_credits"), actualData.get("cost_in_credits"));
+        assertEquals(expextedDataMap.get("length"), actualData.get("length"));
+        assertEquals(expextedDataMap.get("max_atmosphering_speed"), actualData.get("max_atmosphering_speed"));
+        assertEquals(expextedDataMap.get("crew"), actualData.get("crew"));
+        assertEquals(expextedDataMap.get("passengers"), actualData.get("passengers"));
+        assertEquals(expextedDataMap.get("cargo_capacity"), actualData.get("cargo_capacity"));
+        assertEquals(expextedDataMap.get("consumables"), actualData.get("consumables"));
+        assertEquals(expextedDataMap.get("vehicle_class"), actualData.get("vehicle_class"));
+        assertEquals(expextedDataMap.get("pilots"), actualData.get("pilots"));
+        assertEquals(expextedDataMap.get("films"), actualData.get("films"));
+        assertEquals(expextedDataMap.get("created"), actualData.get("created"));
+        assertEquals(expextedDataMap.get("edited"), actualData.get("edited"));
+        assertEquals(expextedDataMap.get("url"), actualData.get("url"));
 
 // kısa yol:
-        assertEquals(expextedDataMap,actualData);
+        assertEquals(expextedDataMap, actualData);
 
 // Homework: JsonPath -----> softAssert kullanarak yapınız...
 
+        JsonPath jsonPath = response.jsonPath();
+        assertEquals(200, response.statusCode());
+        assertEquals(expextedDataMap.get("name"), jsonPath.getString("name"));
+        assertEquals(expextedDataMap.get("model"), jsonPath.getString("model"));
+        assertEquals(expextedDataMap.get("manufacturer"), jsonPath.getString("manufacturer"));
+        assertEquals(expextedDataMap.get("cost_in_credits"), jsonPath.getString("cost_in_credits"));
+        assertEquals(expextedDataMap.get("length"), jsonPath.getString("length"));
+        assertEquals(expextedDataMap.get("max_atmosphering_speed"), jsonPath.getString("max_atmosphering_speed"));
+        assertEquals(expextedDataMap.get("crew"), jsonPath.getString("crew"));
+        assertEquals(expextedDataMap.get("passengers"), jsonPath.getString("passengers"));
+        assertEquals(expextedDataMap.get("cargo_capacity"), jsonPath.getString("cargo_capacity"));
+        assertEquals(expextedDataMap.get("consumables"), jsonPath.getString("consumables"));
+        assertEquals(expextedDataMap.get("vehicle_class"), jsonPath.getString("vehicle_class"));
+        assertEquals(expextedDataMap.get("pilots"), jsonPath.getList("pilots"));
+        assertEquals(expextedDataMap.get("films"), jsonPath.getList("films"));
+        assertEquals(expextedDataMap.get("created"), jsonPath.getString("created"));
+        assertEquals(expextedDataMap.get("edited"), jsonPath.getString("edited"));
+        assertEquals(expextedDataMap.get("url"), jsonPath.getString("url"));
 
 
+        //soft Assert-->>
+        SoftAssert softAssert = new SoftAssert();
+
+        softAssert.assertEquals(200, response.statusCode());
+        softAssert.assertEquals(expextedDataMap.get("name"), jsonPath.getString("name"));
+        softAssert.assertEquals(expextedDataMap.get("model"), jsonPath.getString("model"));
+        softAssert.assertEquals(expextedDataMap.get("manufacturer"), jsonPath.getString("manufacturer"));
+        softAssert.assertEquals(expextedDataMap.get("cost_in_credits"), jsonPath.getString("cost_in_credits"));
+        softAssert.assertEquals(expextedDataMap.get("length"), jsonPath.getString("length"));
+        softAssert.assertEquals(expextedDataMap.get("max_atmosphering_speed"), jsonPath.getString("max_atmosphering_speed"));
+        softAssert.assertEquals(expextedDataMap.get("crew"), jsonPath.getString("crew"));
+        softAssert.assertEquals(expextedDataMap.get("passengers"), jsonPath.getString("passengers"));
+        softAssert.assertEquals(expextedDataMap.get("cargo_capacity"), jsonPath.getString("cargo_capacity"));
+        softAssert.assertEquals(expextedDataMap.get("consumables"), jsonPath.getString("consumables"));
+        softAssert.assertEquals(expextedDataMap.get("vehicle_class"), jsonPath.getString("vehicle_class"));
+        softAssert.assertEquals(expextedDataMap.get("pilots"), jsonPath.getList("pilots"));
+        softAssert.assertEquals(expextedDataMap.get("films"), jsonPath.getList("films"));
+        softAssert.assertEquals(expextedDataMap.get("created"), jsonPath.getString("created"));
+        softAssert.assertEquals(expextedDataMap.get("edited"), jsonPath.getString("edited"));
+        softAssert.assertEquals(expextedDataMap.get("url"), jsonPath.getString("url"));
+
+        softAssert.assertAll();
+
+        softAssert.assertEquals(expextedDataMap, actualData);
+        softAssert.assertEquals(expextedDataMap, jsonPath);
 
 
     }

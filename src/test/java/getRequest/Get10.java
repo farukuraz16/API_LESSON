@@ -1,6 +1,7 @@
 package getRequest;
 
 import BaseURLs.DummyBaseURL;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.Test;
 import testData.DummyTestData;
@@ -10,6 +11,7 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.core.IsEqual.equalTo;
 
@@ -47,7 +49,7 @@ public class Get10 extends DummyBaseURL {
 
         //Step 3--> Send a request
         Response response = given().spec(specification).when().get("/{employeesPath}");
-        response.prettyPrint();
+        //response.prettyPrint();
 
         response.then().assertThat().statusCode((Integer) expectedData.get(0).get("StatusCode")).
                 body("data[-1].employee_name", equalTo (expectedData.get(1).get("EmployeeName")),
@@ -68,6 +70,16 @@ public class Get10 extends DummyBaseURL {
 
         metotoalrını kullanarak assertion işlemlerini tamamlayınız .
          */
+
+
+        assertEquals(expectedData.get(0).get("StatusCode"),response.statusCode());
+        List<Map<String,Object>> jsonActualData = response.jsonPath().getList("data");
+        System.out.println("actualData = " + jsonActualData);
+        assertEquals(expectedData.get(1).get("EmployeeName"),jsonActualData.get(jsonActualData.size()-1).get("employee_name"));
+        assertEquals(expectedData.get(2).get("EmployeeSalary"),jsonActualData.get(5).get("employee_salary"));
+
+        List<Integer> ages = response.jsonPath().getList("data.findAll{(it.employee_age)>0}.employee_age");
+        assertTrue(ages.containsAll((List<Integer>)expectedData.get(3).get("EmployeeAges")));
 
     }
 }

@@ -1,4 +1,4 @@
-package getRequest;
+package PracticeExtra;
 
 import BaseURLs.RestfulBaseURL;
 import io.restassured.response.Response;

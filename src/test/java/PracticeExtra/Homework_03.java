@@ -1,4 +1,4 @@
-package getRequest;
+package PracticeExtra;
 
 import BaseURLs.DummyBaseURL;
 import BaseURLs.RestfulBaseURL;
