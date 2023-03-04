@@ -4,11 +4,14 @@ import BaseURLs.GorestBaseURL;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.Test;
+import pojoDatas.GoRestCoApiPojo;
+import pojoDatas.GoRestPojo;
 import testData.GoRestApiTestData;
 
 import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
+import static junit.framework.TestCase.assertEquals;
 
 public class post02 extends GorestBaseURL {
     /*
@@ -47,7 +50,7 @@ public class post02 extends GorestBaseURL {
 
         //Step 2: set expected data and request body
         GoRestApiTestData goRestApiTestData = new GoRestApiTestData();
-        HashMap<String, String> reqBodyAndExpectedDataMap = goRestApiTestData.reqBodyAndExpectedData("Enes Bera Uraz", "male", "enesuraz@enes.com", "active");
+        HashMap<String, String> reqBodyAndExpectedDataMap = goRestApiTestData.reqBodyAndExpectedData("Enes Uraz", "male", "eneaz@enes.com", "active");
         System.out.println("reqBodyAndExpectedDataMap = " + reqBodyAndExpectedDataMap);
 
         //Step 3: send request response
@@ -61,6 +64,15 @@ public class post02 extends GorestBaseURL {
         response.prettyPrint();
 
         //Step 4: Assertion
+        //Pojo kullanarak assert ediniz
+        GoRestPojo actualData=response.as(GoRestPojo.class);
+        System.out.println("actualData = " + actualData);
+
+        assertEquals(reqBodyAndExpectedDataMap.get("name"),actualData.getName());
+        assertEquals(reqBodyAndExpectedDataMap.get("gender"),actualData.getGender());
+        assertEquals(reqBodyAndExpectedDataMap.get("email"),actualData.getEmail());
+        assertEquals(reqBodyAndExpectedDataMap.get("status"),actualData.getStatus());
+
 
 
     }

@@ -12,6 +12,7 @@ public class RestApiExamBaseUrl {
 
     @Before
     public void setBaseURL(){
-        specification = new RequestSpecBuilder().setBaseUri("http://dummy.restapiexample.com/api/v1").build();
+        specification = new RequestSpecBuilder().setBaseUri("https://dummy.restapiexample.com/api/v1").build();
+
     }
 }

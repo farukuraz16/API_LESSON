@@ -3,7 +3,9 @@ package getRequest;
 import BaseURLs.JsonPlaceHolderBaseURL;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.junit.Assert;
 import org.junit.Test;
+import testData.JsonPlaceHolderTestData;
 import utilities.JsonToJava;
 
 import java.util.HashMap;
@@ -82,5 +84,17 @@ public class Get14 extends JsonPlaceHolderBaseURL {
         assertEquals(expectedDataMap.get("userId"),actualDataMap.get("userId"));
         assertEquals(expectedDataMap.get("completed"),actualDataMap.get("completed"));
 
+
+        //HOMEWORK:   expected data yı JSONPLACEHOLDERTESTDATA classın da bir tane metot create ediniz.
+        JsonPlaceHolderTestData jsonPlaceHolderTestData = new JsonPlaceHolderTestData();
+        HashMap<String,Object> reqBodyAndExpectedDataMap = jsonPlaceHolderTestData.setUpExpectedData();
+        System.out.println("reqBodyAndExpectedDataMap = " + reqBodyAndExpectedDataMap);
+    /*
+        ASSERTION HOMEWORK
+         */
+        Assert.assertEquals(reqBodyAndExpectedDataMap.get("UserId"),actualDataMap.get("UserId"));
+        Assert.assertEquals(reqBodyAndExpectedDataMap.get("id"),actualDataMap.get("id"));
+        Assert.assertEquals(reqBodyAndExpectedDataMap.get("completed"),actualDataMap.get("completed"));
+        Assert.assertEquals(reqBodyAndExpectedDataMap.get("title"),actualDataMap.get("title"));
     }
 }

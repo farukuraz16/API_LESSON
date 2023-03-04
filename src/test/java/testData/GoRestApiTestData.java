@@ -22,7 +22,9 @@ public class GoRestApiTestData {
     //Post işlemi yapacağımız için request Body ile expected data aynıdır.
     //bu yüzden parametreli bir method oluşturacağım ve Post02 classında parametrelerini gireceğim
     public HashMap<String, String> reqBodyAndExpectedData(String name, String gender, String email, String status){
+
         HashMap<String,String> reqBodyAndExpectedDataMap = new HashMap<>();
+
         reqBodyAndExpectedDataMap.put("name", name);
         reqBodyAndExpectedDataMap.put("gender", gender);
         reqBodyAndExpectedDataMap.put("email", email);
